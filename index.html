@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asad Qaisar | Software Engineer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root{
+  --void:#050508; --void2:#0a0a0f; --acid:#c8ff00; --ice:#00e5ff; --pink:#ff2d6b;
+  --w02:rgba(255,255,255,0.08); --w05:rgba(255,255,255,0.15); --w10:rgba(255,255,255,0.3); --txt:rgba(255,255,255,1); --mut:rgba(255,255,255,0.75);
+}
+* { box-sizing:border-box; margin:0; padding:0; cursor:none !important; }
+html { font-size:16px; scroll-behavior:smooth; background:var(--void); color:var(--txt); font-family:'Syne',sans-serif; overflow-x:hidden; }
+body { padding-bottom:28px; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"); }
+::-webkit-scrollbar { width:3px; } ::-webkit-scrollbar-track { background:var(--void); } ::-webkit-scrollbar-thumb { background:var(--acid); }
+h1,h2,h3,.h-ghost,.pt-gh,.ab-num,.pj-idx,.bl-n,.n-logo,.lo-t,.hs-t,.xp-rt,.f-sub,.mq-item,.ft-brand, .ct-big { font-family:'Bebas Neue',cursive; font-weight:normal; text-transform:uppercase; line-height:1.1; }
+.s-lbl,.tg,.n-links a,.n-status,.i-k,.pt-tg,.st-l,.cat-btn,.sk-th,.pj-cat,.pj-lks a,.xp-nr,.xp-dt,.bl-tg,.bl-d,.ci-k, .fm::before,.tck-i,.lo-p { font-family:'Syne Mono',monospace; letter-spacing:0.05em; text-transform:uppercase; font-size:clamp(0.58rem,1.2vw,0.72rem); }
+.a { color:var(--acid); } .t-a { color:var(--acid); text-shadow:0 0 30px rgba(200,255,0,0.3); } .i { color:var(--ice); }
+a { color:inherit; text-decoration:none; transition:color 0.3s; } a:hover { color:var(--acid); }
+canvas#bg { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:0; pointer-events:none; }
+section, nav, footer, .marquee, .ticker, #loader { position:relative; z-index:1; }
+#cur { position:fixed; top:0; left:0; width:40px; height:40px; border:1.5px solid var(--acid); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); z-index:9999; mix-blend-mode:difference; transition:width 0.2s, height 0.2s, border-color 0.2s; }
+#cur2 { position:fixed; top:0; left:0; width:6px; height:6px; background:var(--acid); border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); z-index:9999; }
+body.mdn #cur { width:16px; height:16px; border-color:var(--pink); }
+
+.lof { position:fixed; inset:0; background:var(--void); z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.8s, visibility 0.8s; }
+.lof.gone { opacity:0; visibility:hidden; }
+.lo-t { font-size:clamp(4rem,18vw,12rem); color:var(--acid); animation:flk 3s infinite; }
+.lo-b { width:clamp(220px,40vw,280px); height:2px; background:var(--w10); margin:2rem 0 1rem; overflow:hidden; }
+.lo-f { height:100%; width:0%; background:var(--acid); transition:width 0.2s linear; }
+@keyframes flk { 0%,100%{opacity:1;} 50%{opacity:0.8; text-shadow:0 0 20px rgba(200,255,0,0.5);} 52%{opacity:0.3;} 54%{opacity:1;} }
+
+nav { position:fixed; top:0; left:0; right:0; padding:1.5rem clamp(1.2rem,5vw,7rem); display:flex; justify-content:space-between; align-items:center; mix-blend-mode:difference; z-index:500; }
+.n-logo { font-size:clamp(1.4rem,3vw,2rem); color:var(--acid); text-shadow:0 0 15px rgba(200,255,0,0.4); }
+.n-links { display:flex; gap:2rem; } .n-links a { opacity:0.8; } .n-links a:hover, .n-links a.act { opacity:1; color:var(--acid); }
+.n-status { display:flex; align-items:center; gap:0.5rem; opacity:0.8; }
+.n-dot { width:8px; height:8px; background:var(--acid); border-radius:50%; animation:bl 1s infinite alternate; }
+@keyframes bl { from{opacity:0.2;} to{opacity:1; box-shadow:0 0 10px var(--acid);} }
+
+section { min-height:100vh; padding:8rem clamp(1.2rem,5vw,7rem); border-bottom:1px solid transparent; border-image:linear-gradient(90deg,transparent,var(--w05),transparent) 1; }
+#hero { display:flex; flex-direction:column; justify-content:center; padding-top:10rem; }
+.h-ghost { position:absolute; right:-5vw; top:50%; transform:translateY(-50%); font-size:35vw; color:var(--w02); z-index:-1; user-select:none; }
+.h-eye { color:var(--acid); letter-spacing:0.3em; margin-bottom:1rem; }
+.h-title { font-size:clamp(3.5rem,18vw,17rem); text-shadow:none; letter-spacing:0.02em; display:flex; flex-direction:column; }
+.ht-wrap { overflow:hidden; } .ht-in { display:inline-block; transform:translateY(110%); transition:transform 1s cubic-bezier(.16,1,.3,1); }
+#hero.in .ht-in { transform:translateY(0); } .ht-wrap:nth-child(2) .ht-in { transition-delay:0.15s; }
+.h-bottom { display:flex; justify-content:space-between; align-items:flex-end; margin-top:3rem; max-width:1200px; gap:4rem; }
+.h-desc { flex:1; font-size:clamp(0.85rem,1.5vw,1.1rem); line-height:1.6; color:var(--mut); max-width:500px; }
+.h-roles { display:flex; flex-direction:column; gap:0.5rem; align-items:flex-end; }
+.tg { border:1px solid var(--w10); padding:0.3rem 0.8rem; border-radius:20px; color:var(--ice); background:rgba(0,229,255,0.1); }
+.h-scroll { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:1rem; }
+.hs-t { writing-mode:vertical-rl; color:var(--mut); }
+.hs-l { width:1px; height:60px; background:linear-gradient(to bottom,var(--acid),transparent); animation:sd 2s infinite; }
+@keyframes sd { 0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 50.1%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;} }
+
+.marquee { padding:1.5rem 0; border-top:1px solid var(--w05); border-bottom:1px solid var(--w05); overflow:hidden; white-space:nowrap; display:flex; background:rgba(5,5,8,0.5); }
+.mq-in { display:inline-flex; animation:mq 22s linear infinite; }
+.mq-item { padding:0 2.5rem; font-size:clamp(0.9rem,2vw,1.2rem); letter-spacing:0.1em; color:var(--w10); } .mq-item.a { color:var(--acid); }
+@keyframes mq { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+
+.s-lbl { color:var(--mut); margin-bottom:1rem; display:flex; align-items:center; gap:1rem; }
+.s-lbl::before { content:''; width:40px; height:1px; background:var(--w10); }
+h2 { font-size:clamp(2.5rem,7vw,5.5rem); margin-bottom:3rem; }
+.ab-wrap { display:grid; grid-template-columns:1.1fr 1fr; gap:5rem; align-items:center; }
+.ab-l p { font-size:clamp(0.85rem,1.5vw,1.1rem); line-height:1.8; color:var(--mut); margin-bottom:1.5rem; }
+.info-g { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:3rem; }
+.ib { border:1px solid var(--w10); padding:1.2rem; background:rgba(255,255,255,0.05); }
+.i-k { color:var(--mut); margin-bottom:0.8rem; } .i-v { font-size:0.85rem; line-height:1.5; color:var(--txt); }
+.ab-r { position:relative; aspect-ratio:3/4; background:var(--void2); display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid var(--w05); box-shadow:0 20px 50px rgba(0,0,0,0.5); }
+.ab-r::after { content:''; position:absolute; inset:0; background:repeating-linear-gradient(transparent,transparent 2px,rgba(0,0,0,0.1) 2px,rgba(0,0,0,0.1) 4px); pointer-events:none; }
+.ab-num { position:absolute; right:-5%; top:-5%; font-size:22vw; color:var(--w02); line-height:0.8; }
+.pt-gh { font-size:clamp(4rem,15vw,10rem); color:var(--w05); letter-spacing:-0.05em; }
+.pt-tg { position:absolute; bottom:1.5rem; left:1.5rem; background:var(--acid); color:var(--void); padding:0.4rem 1rem; }
+
+.st-bg { background:var(--void2); }
+.st-row { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--w05); border:1px solid var(--w05); }
+.st-box { background:var(--void2); padding:3rem 1.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; transition:background 0.3s; }
+.st-box::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--acid); transform:scaleX(0); transition:transform 0.4s; transform-origin:left; }
+.st-box:hover { background:var(--void); } .st-box:hover::after { transform:scaleX(1); }
+.st-n { font-size:clamp(2.5rem,8vw,5.5rem); color:var(--acid); text-shadow:0 0 20px rgba(200,255,0,0.2); margin-bottom:0.5rem; line-height:1; }
+
+.sk-layout { display:grid; grid-template-columns:360px 1fr; gap:5rem; }
+.sk-cats { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
+.cat-btn { padding:1rem 1.5rem; border:1px solid var(--w10); color:var(--mut); transition:all 0.3s; display:flex; justify-content:space-between; align-items:center; }
+.cat-btn:hover { border-color:var(--w10); color:var(--txt); }
+.cat-btn.on { border-color:var(--acid); background:rgba(200,255,0,0.1); color:var(--acid); text-shadow:0 0 10px rgba(200,255,0,0.3); }
+.cat-btn.on::after { content:'â–¶'; font-size:0.8em; }
+.sk-r { position:relative; } .sk-pan { display:none; flex-direction:column; gap:2rem; animation:fi 0.5s ease forwards; } .sk-pan.on { display:flex; }
+@keyframes fi { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+.sk-th { display:flex; justify-content:space-between; margin-bottom:0.8rem; } .sk-th .k { color:var(--txt); } .sk-th .v { color:var(--acid); }
+.sk-b { height:3px; background:var(--w10); overflow:hidden; border-radius:1.5px; }
+.sk-f { height:100%; width:0; background:linear-gradient(90deg,var(--acid),var(--ice)); box-shadow:0 0 10px var(--ice); transform-origin:left; transition:width 1.3s cubic-bezier(.16,1,.3,1); }
+.in .sk-f { width:var(--w, 0%); }
+
+.pj-t p { max-width:600px; color:var(--mut); font-size:clamp(0.85rem,1.5vw,1.1rem); margin-bottom:4rem; }
+.pj-g { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--w05); border:1px solid var(--w05); }
+.pj-c { background:var(--void2); padding:3rem; position:relative; transition:background 0.3s; transform-style:preserve-3d; }
+.pj-c::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--acid),transparent); transform:scaleX(0); transition:transform 0.4s; transform-origin:left; }
+.pj-idx { position:absolute; top:1.5rem; right:2rem; font-size:5.5rem; color:var(--w02); transition:color 0.3s; pointer-events:none; }
+.pj-c:hover { background:var(--void); } .pj-c:hover::before { transform:scaleX(1); } .pj-c:hover .pj-idx { color:var(--w05); }
+.pj-c:hover .pj-tgs .tg { color:var(--acid); border-color:rgba(200,255,0,0.2); }
+.pj-cat { color:var(--ice); margin-bottom:1rem; display:inline-block; } .pj-nm { font-size:clamp(1.3rem,3vw,2.2rem); margin-bottom:1.5rem; }
+.pj-c p { color:var(--mut); line-height:1.6; font-size:clamp(0.85rem,1.2vw,0.95rem); margin-bottom:2rem; }
+.pj-tgs { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.5rem; } .pj-tgs .tg { background:transparent; transition:all 0.3s; }
+.pj-lks { display:flex; gap:1.5rem; } .pj-lks a { border-bottom:1px solid var(--w10); padding-bottom:0.2rem; } .pj-lks a:hover { border-color:var(--acid); }
+
+.xp-g { display:grid; grid-template-columns:1fr 2fr; gap:5rem; } .xp-nav { position:sticky; top:100px; }
+.xp-nav-list { display:flex; flex-direction:column; margin-top:2rem; }
+.xp-ni { padding:1.2rem 1.5rem; border-left:1px solid var(--w05); transition:all 0.3s; position:relative; cursor:pointer; }
+.xp-ni:hover { background:rgba(255,255,255,0.08); }
+.xp-ni.on { border-color:transparent; background:rgba(200,255,0,0.1); }
+.xp-ni.on::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--acid); }
+.xp-nr { font-size:0.85rem; color:var(--mut); margin-bottom:0.4rem; transition:color 0.3s; } .xp-ni.on .xp-nr { color:var(--txt); }
+.xp-nc { color:var(--mut); transition:color 0.3s; } .xp-ni.on .xp-nc { color:var(--acid); }
+.xp-panels { padding-top:4rem; } .xp-pan { display:none; flex-direction:column; animation:fi 0.4s ease forwards; } .xp-pan.on { display:flex; }
+.xp-dt { color:var(--acid); margin-bottom:1.5rem; } .xp-rt { font-size:clamp(1.8rem,4vw,3rem); margin-bottom:0.5rem; }
+.xp-rc { color:var(--ice); margin-bottom:2rem; font-family:'Syne Mono',monospace; font-size:0.85rem; }
+.xp-ul { list-style:none; } .xp-ul li { color:var(--mut); line-height:1.7; margin-bottom:1rem; display:flex; gap:1rem; }
+
+.bl-g { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+.bl-c { border:1px solid var(--w05); padding:2rem; background:rgba(255,255,255,0.05); display:flex; flex-direction:column; position:relative; overflow:hidden; transition:all 0.4s cubic-bezier(.16,1,.3,1); }
+.bl-c::before { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,transparent,rgba(200,255,0,0.1)); opacity:0; transition:opacity 0.4s; pointer-events:none; }
+.bl-c:hover { border-color:var(--acid); transform:translateY(-6px); box-shadow:0 15px 40px rgba(0,0,0,0.5); }
+.bl-c:hover::before { opacity:1; } .bl-c:hover .bl-ar { transform:translate(4px,-4px); color:var(--acid); }
+.bl-n { position:absolute; top:1rem; right:1.5rem; font-size:4rem; color:var(--w02); }
+.bl-tg { color:var(--ice); margin-bottom:1.5rem; } .bl-tg.a { color:var(--acid); }
+.bl-tl { font-size:1.1rem; font-weight:600; line-height:1.4; margin-bottom:1rem; }
+.bl-ex { color:var(--mut); font-size:0.85rem; line-height:1.6; margin-bottom:3rem; flex:1; }
+.bl-ft { display:flex; justify-content:space-between; align-items:flex-end; border-top:1px solid var(--w05); padding-top:1.5rem; }
+.bl-ar { font-size:1.2rem; transition:transform 0.3s; }
+
+.ct-g { display:grid; grid-template-columns:1fr 1fr; gap:6rem; }
+.ct-big { font-size:clamp(3rem,10vw,8rem); margin-bottom:4rem; }
+.ci-g { display:flex; flex-direction:column; gap:1.5rem; }
+.ci { display:flex; gap:1.5rem; align-items:center; border:1px solid var(--w05); padding:1.2rem; background:rgba(255,255,255,0.05); transition:all 0.3s; }
+.ci:hover { border-color:var(--acid); background:rgba(200,255,0,0.1); }
+.ci-ic { width:40px; height:40px; display:flex; align-items:center; justify-content:center; border:1px solid var(--acid); color:var(--acid); font-size:1rem; }
+.ci-k { margin-bottom:0.4rem; color:var(--mut); } .ci-v { font-size:0.9rem; }
+.ct-r { position:relative; }
+.fm { background:var(--void2); border:1px solid var(--w10); padding:3rem; position:relative; display:flex; flex-direction:column; gap:2rem; margin-top:5rem; }
+.fm::before { content:'SEND_MESSAGE.EXE'; position:absolute; top:0; left:2rem; transform:translateY(-50%); background:var(--acid); color:var(--void); padding:0.4rem 1rem; }
+.f-in { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+input, textarea { width:100%; background:transparent; border:none; border-bottom:1px solid var(--w10); padding:1rem 0; color:var(--txt); font-family:'Syne',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.3s; resize:none; border-radius:0; }
+input:focus, textarea:focus { border-color:var(--acid); box-shadow:0 1px 0 var(--acid); }
+.f-sub { align-self:flex-start; background:var(--acid); color:var(--void); border:none; padding:1.2rem 3rem; font-size:1.5rem; position:relative; overflow:hidden; transition:all 0.3s; }
+.f-sub::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent); transition:left 0.5s; }
+.f-sub:hover::before { left:100%; } .f-sub:hover { box-shadow:0 0 20px rgba(200,255,0,0.4); }
+
+.ticker { position:fixed; bottom:0; left:0; right:0; height:26px; background:var(--acid); z-index:400; overflow:hidden; display:flex; align-items:center; }
+.tck-in { display:inline-flex; animation:mq 15s linear infinite; }
+.tck-i { color:#05050c; font-weight:bold; padding:0 1.5rem; white-space:nowrap; }
+
+footer { display:flex; justify-content:space-between; align-items:end; padding:4rem clamp(1.2rem,5vw,7rem) 5rem; border-top:1px solid var(--w05); border-image:linear-gradient(90deg,transparent,var(--w05),transparent) 1; }
+.ft-brand { font-size:clamp(1.8rem,5vw,2.8rem); line-height:1; }
+.ft-r { text-align:right; }
+.ft-lks { display:flex; gap:2rem; margin-bottom:1rem; justify-content:flex-end; }
+.ft-lks a { font-size:0.85rem; color:var(--mut); } .ft-lks a:hover { color:var(--txt); }
+.ft-cpy { font-family:'Syne Mono',monospace; font-size:0.55rem; color:var(--w10); }
+
+.reveal { opacity:0; transform:translateY(36px); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+.rl { opacity:0; transform:translateX(-36px); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+.rr { opacity:0; transform:translateX(36px); transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+.in { opacity:1; transform:none !important; }
+
+@media (max-width: 1100px) {
+  .st-row { grid-template-columns: repeat(3, 1fr); }
+  .sk-layout { grid-template-columns: 300px 1fr; gap: 3rem; }
+}
+@media (max-width: 900px) {
+  nav .n-links, .n-status { display: none; }
+  .ab-wrap, .sk-layout, .ct-g, .xp-g { grid-template-columns: 1fr; }
+  .portrait { display: none; }
+  .pj-g, .bl-g { grid-template-columns: 1fr; }
+  .bl-g { grid-template-columns: repeat(2, 1fr); }
+  .sk-cats { flex-direction: row; flex-wrap: wrap; }
+  .cat-btn { flex: 1; min-width: 140px; }
+  .xp-nav { position: static; }
+  .xp-nav-list { flex-direction: row; flex-wrap: wrap; }
+  .xp-ni { border-right: 1px solid var(--w05); border-left:none; border-bottom: none; flex: 1; min-width: 130px; }
+  .xp-ni.on::before { bottom: 0; top: auto; width: 100%; height: 2px; left: 0; }
+  .xp-panels { padding-top: 1.5rem; }
+  .ft-brand { font-size: clamp(1.8rem, 6vw, 2.8rem); }
+  footer { flex-direction: column; align-items: center; text-align: center; gap:3rem;}
+  .ft-lks { justify-content: center; }
+  .fm { margin-top:2rem;}
+}
+@media (max-width: 600px) {
+  body { padding-bottom: 24px; }
+  section { padding-top: 4rem; padding-bottom: 4rem; }
+  .h-title { font-size: clamp(3rem, 14vw, 5rem); }
+  .h-bottom { flex-direction: column; gap: 1.5rem; align-items:flex-start;}
+  .h-roles { flex-direction: row; flex-wrap: wrap; justify-content:flex-start;}
+  .h-scroll { display: none; }
+  .info-g { grid-template-columns: 1fr; }
+  .ab-num { font-size: 40vw; }
+  .st-row { grid-template-columns: repeat(2, 1fr); }
+  .st-n { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+  .st-box { padding: 1.8rem 1rem; }
+  .sk-layout { gap: 2rem; }
+  .pj-g { grid-template-columns: 1fr; }
+  .pj-c { padding: 1.8rem; }
+  .pj-idx { font-size: 3.5rem; }
+  .xp-ni { min-width: 100px; padding: 0.7rem 0.4rem; }
+  .xp-nr { font-size: 0.72rem; }
+  .bl-g { grid-template-columns: 1fr; }
+  .ct-big { font-size: clamp(3rem, 12vw, 5rem); }
+  .ci-ic { width: 30px; height: 30px; font-size: 0.75rem; }
+  .f-in { grid-template-columns: 1fr; }
+  .fm { padding: 1.5rem; }
+  .fm::before { font-size: 0.52rem; left: 1rem; }
+  .f-sub { font-size: 1.2rem; }
+  .ticker { height: 22px; }
+  .tck-i { font-size: 0.52rem; padding: 0 1.2rem; }
+  .mq-item { font-size: clamp(0.85rem, 3.5vw, 1.1rem); padding: 0 1.4rem; }
+}
+@media (max-width: 380px) {
+  .h-title { font-size: clamp(2.8rem, 13vw, 4rem); }
+  .st-row { grid-template-columns: 1fr 1fr; }
+  .st-n { font-size: 2.2rem; }
+  .pj-c { padding: 1.4rem; }
+  .ct-big { font-size: clamp(2.5rem, 11vw, 4rem); }
+}
+
+    </style>
+</head>
+<body>
+    <canvas id="bg"></canvas>
+    <div id="cur"></div>
+    <div id="cur2"></div>
+    <div id="loader" class="lof">
+        <div class="lo-t">AQ</div>
+        <div class="lo-b"><div class="lo-f" id="lfill"></div></div>
+        <div class="lo-p" id="lperc">0%</div>
+    </div>
+    <nav>
+        <a href="#" class="n-logo">AQ</a>
+        <div class="n-links">
+            <a href="#about">About</a>
+            <a href="#stack">Stack</a>
+            <a href="#projects">Work</a>
+            <a href="#experience">XP</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="n-status">OPEN_TO_WORK<div class="n-dot"></div></div>
+    </nav>
+
+    <section id="hero">
+        <div class="h-ghost">AQ</div>
+        <div class="h-eye reveal">// Software Engineer Â· Faisalabad, Pakistan</div>
+        <h1 class="h-title">
+            <div class="ht-wrap"><span class="ht-in rl">ASAD</span></div>
+            <div class="ht-wrap"><span class="ht-in rr t-a">QAISAR</span></div>
+        </h1>
+        <div class="h-bottom reveal">
+            <p class="h-desc">Building real-world systems with clean code, creative design, and technical precision.</p>
+            <div class="h-roles">
+                <span class="tg">Software Engineer</span>
+                <span class="tg">App Developer</span>
+                <span class="tg">QA Analyst</span>
+                <span class="tg">Graphic Designer</span>
+                <span class="tg">Event Organizer</span>
+            </div>
+        </div>
+        <div class="h-scroll reveal">
+            <div class="hs-t">Scroll</div>
+            <div class="hs-l"></div>
+        </div>
+    </section>
+
+    <div class="marquee reveal">
+        <div class="mq-in">
+            <div class="mq-item">Software Engineer</div>
+            <div class="mq-item">App Developer</div>
+            <div class="mq-item a">QA Analyst</div>
+            <div class="mq-item">Graphic Designer</div>
+            <div class="mq-item">Event Organizer</div>
+            <div class="mq-item a">C++ Expert</div>
+            <div class="mq-item">Big Data Â· PySpark</div>
+            <div class="mq-item">MySQL Â· Java</div>
+            <div class="mq-item a">Brand Identity</div>
+            <div class="mq-item">Web Developer</div>
+            <div class="mq-item">OOP Â· DSA</div>
+            <div class="mq-item a">Open to Work</div>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="ab-wrap">
+            <div class="ab-l rl">
+                <div class="s-lbl">01 &mdash; About Me</div>
+                <h2>Who Am I?</h2>
+                <p>Asad Qaisar is a Software Engineering student at The University of Faisalabad &mdash; a multi-skilled developer and creative professional working across app content management, QA testing, graphic design, event management, and web development. He has collaborated with a Dubai-based company (22BC), led a university IT Society as Head of Tech, and brings a rare mix of technical depth and creative range.</p>
+                <p>He believes great software is built at the intersection of logic and empathy.</p>
+                <div class="info-g reveal">
+                    <div class="ib"><div class="i-k">Education</div><div class="i-v">BS Software Engineering, The University of Faisalabad, 2022&ndash;Present</div></div>
+                    <div class="ib"><div class="i-k">Location</div><div class="i-v">Near Canal Rest House, Moongi Bungalow, Gojra, Punjab, PK</div></div>
+                    <div class="ib"><div class="i-k">Email</div><div class="i-v">asadqaisar17@gmail.com</div></div>
+                    <div class="ib"><div class="i-k">Phone</div><div class="i-v">+92 309 988 8024</div></div>
+                    <div class="ib"><div class="i-k">Prev. Education</div><div class="i-v">Intermediate CS, Aspire College Gojra, 2020&ndash;2022</div></div>
+                    <div class="ib"><div class="i-k">Status</div><div class="i-v t-a">Open to Work</div></div>
+                </div>
+            </div>
+            <div class="ab-r rr portrait">
+                <div class="ab-num">01</div>
+                <div class="pt-gh">AQ</div>
+                <div class="pt-tg">Asad Qaisar &middot; SE</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="st-bg">
+        <div class="st-row reveal">
+            <div class="st-box"><div class="st-n" data-n="347">0</div><div class="st-l">Contributions</div></div>
+            <div class="st-box"><div class="st-n" data-n="12">0</div><div class="st-l">Repositories</div></div>
+            <div class="st-box"><div class="st-n" data-n="48">0</div><div class="st-l">Stars Earned</div></div>
+            <div class="st-box"><div class="st-n" data-n="23">0</div><div class="st-l">Forks</div></div>
+            <div class="st-box"><div class="st-n" data-n="5">0</div><div class="st-l">Pull Requests</div></div>
+        </div>
+    </section>
+
+    <section id="stack">
+        <div class="sk-layout">
+            <div class="sk-l rl">
+                <div class="s-lbl">02 &mdash; Skills & Expertise</div>
+                <h2>Tech Stack</h2>
+                <div class="sk-cats">
+                    <div class="cat-btn on" onclick="st(0)">Programming & Dev</div>
+                    <div class="cat-btn" onclick="st(1)">Concepts & Eng.</div>
+                    <div class="cat-btn" onclick="st(2)">Creative & Media</div>
+                </div>
+            </div>
+            <div class="sk-r rr">
+                <div class="sk-pan on" id="sp0">
+                    <div class="sk-i"><div class="sk-th"><span class="k">C++</span><span class="v">95%</span></div><div class="sk-b"><div class="sk-f" data-w="95%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">HTML</span><span class="v">95%</span></div><div class="sk-b"><div class="sk-f" data-w="95%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">CSS</span><span class="v">90%</span></div><div class="sk-b"><div class="sk-f" data-w="90%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Python</span><span class="v">80%</span></div><div class="sk-b"><div class="sk-f" data-w="80%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Java</span><span class="v">65%</span></div><div class="sk-b"><div class="sk-f" data-w="65%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">MySQL</span><span class="v">65%</span></div><div class="sk-b"><div class="sk-f" data-w="65%"></div></div></div>
+                </div>
+                <div class="sk-pan" id="sp1">
+                    <div class="sk-i"><div class="sk-th"><span class="k">OOP</span><span class="v">95%</span></div><div class="sk-b"><div class="sk-f" data-w="95%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Web Development</span><span class="v">85%</span></div><div class="sk-b"><div class="sk-f" data-w="85%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Data Structures</span><span class="v">80%</span></div><div class="sk-b"><div class="sk-f" data-w="80%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">QA & Testing</span><span class="v">80%</span></div><div class="sk-b"><div class="sk-f" data-w="80%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Software Eng Principles</span><span class="v">75%</span></div><div class="sk-b"><div class="sk-f" data-w="75%"></div></div></div>
+                </div>
+                <div class="sk-pan" id="sp2">
+                    <div class="sk-i"><div class="sk-th"><span class="k">Event Management</span><span class="v">90%</span></div><div class="sk-b"><div class="sk-f" data-w="90%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Graphic Design</span><span class="v">85%</span></div><div class="sk-b"><div class="sk-f" data-w="85%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Video Editing</span><span class="v">80%</span></div><div class="sk-b"><div class="sk-f" data-w="80%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Image Editing</span><span class="v">80%</span></div><div class="sk-b"><div class="sk-f" data-w="80%"></div></div></div>
+                    <div class="sk-i"><div class="sk-th"><span class="k">Videography</span><span class="v">75%</span></div><div class="sk-b"><div class="sk-f" data-w="75%"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="st-bg">
+        <div class="pj-t reveal">
+            <div class="s-lbl">04 &mdash; Selected Work</div><h2>Projects</h2>
+            <p>A collection of applications, engineering systems, and creative projects built thoughtfully.</p>
+        </div>
+        <div class="pj-g reveal">
+            <div class="pj-c">
+                <div class="pj-idx">01</div>
+                <div class="pj-cat">AI &middot; Mobile &middot; Final Year Project</div>
+                <div class="pj-nm">Vital Cart</div>
+                <p>Barcode-scanning health assistant detecting harmful ingredients based on user health profile. Supports allergy tracking, AI-based risk scoring and healthier alternatives.</p>
+                <div class="pj-tgs"><span class="tg">AI Integration</span><span class="tg">Barcode Scanning</span><span class="tg">Mobile/Web Tech</span><span class="tg">Health Tech</span></div>
+                <div class="pj-lks"><a href="#">GitHub â†—</a><a href="#">Live Demo â†—</a></div>
+            </div>
+            <div class="pj-c">
+                <div class="pj-idx">02</div>
+                <div class="pj-cat">Enterprise &middot; Desktop App</div>
+                <div class="pj-nm">POS & Inventory System</div>
+                <p>Complete point-of-sale and inventory solution with billing, PDF export, inventory tracking, monthly sales reports, thermal printing, and role-based authentication.</p>
+                <div class="pj-tgs"><span class="tg">Desktop App</span><span class="tg">Database</span><span class="tg">Auth System</span><span class="tg">PDF Export</span></div>
+                <div class="pj-lks"><a href="#">GitHub â†—</a><a href="#">Live Demo â†—</a></div>
+            </div>
+            <div class="pj-c">
+                <div class="pj-idx">03</div>
+                <div class="pj-cat">Data Engineering &middot; ML</div>
+                <div class="pj-nm">Music Recommendation Engine</div>
+                <p>Big-data recommendation engine suggesting songs based on genre and artist preferences using distributed computing. Built on PySpark and Hive.</p>
+                <div class="pj-tgs"><span class="tg">PySpark</span><span class="tg">Apache Hive</span><span class="tg">Big Data</span><span class="tg">ML</span></div>
+                <div class="pj-lks"><a href="#">GitHub â†—</a></div>
+            </div>
+            <div class="pj-c">
+                <div class="pj-idx">04</div>
+                <div class="pj-cat">Branding &middot; Graphic Design</div>
+                <div class="pj-nm">22BC Brand Identity</div>
+                <p>Complete brand identity for a Dubai-based company including master logo, letterheads, and personalized business cards for every team member and department.</p>
+                <div class="pj-tgs"><span class="tg">Adobe Illustrator</span><span class="tg">Photoshop</span><span class="tg">Brand Guidelines</span><span class="tg">Identity Design</span></div>
+                <div class="pj-lks"><a href="#">Behance â†—</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="xp-g reveal">
+            <div class="xp-nav">
+                <div class="s-lbl">03 &mdash; Work Experience</div>
+                <div class="xp-nav-list">
+                    <div class="xp-ni on" onclick="xp(0)"><div class="xp-nr">App Content Manager</div><div class="xp-nc">Logic Hive Homez</div></div>
+                    <div class="xp-ni" onclick="xp(1)"><div class="xp-nr">Graphic Designer</div><div class="xp-nc">22BC Company</div></div>
+                    <div class="xp-ni" onclick="xp(2)"><div class="xp-nr">General Sec & Event Lead</div><div class="xp-nc">TUF E-Gaming Society</div></div>
+                    <div class="xp-ni" onclick="xp(3)"><div class="xp-nr">Web Dev Training</div><div class="xp-nc">Career Institute</div></div>
+                    <div class="xp-ni" onclick="xp(4)"><div class="xp-nr">Head of Tech</div><div class="xp-nc">IT-Society TUF</div></div>
+                    <div class="xp-ni" onclick="xp(5)"><div class="xp-nr">CCTV Installation Advisor</div><div class="xp-nc">Ghazali CCTV</div></div>
+                </div>
+            </div>
+            <div class="xp-panels">
+                <div class="xp-pan on" id="xp0">
+                    <div class="xp-dt">Jan 2025&ndash;Present</div>
+                    <div class="xp-rt">App Content Manager & QA Analyst</div>
+                    <div class="xp-rc">Logic Hive Homez, Faisalabad</div>
+                    <ul class="xp-ul"><li>&rarr; Rigorously test and identify bugs before release; report issues with detailed steps.</li><li>&rarr; Monitor and maintain app quality for seamless UX.</li></ul>
+                </div>
+                <div class="xp-pan" id="xp1">
+                    <div class="xp-dt">Jan 2024&ndash;Mar 2025</div>
+                    <div class="xp-rt">Graphic Designer</div>
+                    <div class="xp-rc">22BC Company, Dubai (Remote)</div>
+                    <ul class="xp-ul"><li>&rarr; Created cohesive brand identity (logo, letterhead, business cards).</li><li>&rarr; Delivered personalized designs for all team members and departments.</li><li>&rarr; Collaborated remotely across time zones.</li></ul>
+                </div>
+                <div class="xp-pan" id="xp2">
+                    <div class="xp-dt">Oct 2023&ndash;Present</div>
+                    <div class="xp-rt">General Secretary & Event Lead</div>
+                    <div class="xp-rc">TUF E-Gaming Society</div>
+                    <ul class="xp-ul"><li>&rarr; Ramzan Cup: Managed large-scale Tekken tournament.</li><li>&rarr; PMCC PUBG Mobile Club Championship: Coordinated and executed competitive tournament.</li><li>&rarr; Arfiesta: Multi-gaming event bringing various communities together.</li><li>&rarr; Oversees all event planning and community building.</li></ul>
+                </div>
+                <div class="xp-pan" id="xp3">
+                    <div class="xp-dt">May 2024&ndash;Aug 2024</div>
+                    <div class="xp-rt">Web Development Training</div>
+                    <div class="xp-rc">Career Institute</div>
+                    <ul class="xp-ul"><li>&rarr; Professional course covering HTML, CSS, JavaScript.</li><li>&rarr; Built practical hands-on projects.</li></ul>
+                </div>
+                <div class="xp-pan" id="xp4">
+                    <div class="xp-dt">Dec 2022&ndash;Sep 2024</div>
+                    <div class="xp-rt">Head of Tech</div>
+                    <div class="xp-rc">IT-Society TUF</div>
+                    <ul class="xp-ul"><li>&rarr; Led technical team for events and workshops.</li><li>&rarr; Oversaw all technical setups and IT support.</li><li>&rarr; Mentored junior members and contributed to digital growth.</li></ul>
+                </div>
+                <div class="xp-pan" id="xp5">
+                    <div class="xp-dt">Feb 2021&ndash;Sep 2022</div>
+                    <div class="xp-rt">Security Cameras Installation Advisor</div>
+                    <div class="xp-rc">Ghazali CCTV Securities</div>
+                    <ul class="xp-ul"><li>&rarr; Advised clients on CCTV requirements and installation guidance.</li><li>&rarr; Conducted site assessments and handled customer relations.</li></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="st-bg">
+        <div class="s-lbl reveal">07 &mdash; Writing</div><h2 class="reveal">Blog Posts</h2>
+        <div class="bl-g reveal">
+            <a href="#" class="bl-c">
+                <div class="bl-n">01</div><div class="bl-tg a">QA Engineering</div>
+                <div class="bl-tl">Why QA Is the Most Underrated Role in Software Teams</div>
+                <div class="bl-ex">"Most teams think QA is just clicking buttons. Here's why systematic testing is one of the highest-leverage activities a dev team can invest in."</div>
+                <div class="bl-ft"><div class="bl-d">Feb 10, 2025</div><div class="bl-ar">&#x2197;</div></div>
+            </a>
+            <a href="#" class="bl-c">
+                <div class="bl-n">02</div><div class="bl-tg">Big Data</div>
+                <div class="bl-tl">Building a Music Recommender with PySpark and Hive</div>
+                <div class="bl-ex">"A deep dive into how I built a distributed recommendation engine from scratch &mdash; architecture decisions, failures, and wins."</div>
+                <div class="bl-ft"><div class="bl-d">Nov 22, 2024</div><div class="bl-ar">&#x2197;</div></div>
+            </a>
+            <a href="#" class="bl-c">
+                <div class="bl-n">03</div><div class="bl-tg">Design</div>
+                <div class="bl-tl">From Code to Canvas: Lessons from Designing for 22BC</div>
+                <div class="bl-ex">"What it's like handling an entire brand identity solo for a Dubai company &mdash; from logo concept to printed business cards."</div>
+                <div class="bl-ft"><div class="bl-d">Aug 5, 2024</div><div class="bl-ar">&#x2197;</div></div>
+            </a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="ct-g reveal">
+            <div class="ct-l">
+                <div class="ct-big">Let's<br><span class="a">Build</span><br>Together</div>
+                <div class="ci-g">
+                    <div class="ci"><div class="ci-ic">&#x2709;</div><div><div class="ci-k">EMAIL</div><div class="ci-v">asadqaisar17@gmail.com</div></div></div>
+                    <div class="ci"><div class="ci-ic">&#x260E;</div><div><div class="ci-k">PHONE</div><div class="ci-v">+92 309 988 8024</div></div></div>
+                    <div class="ci"><div class="ci-ic">&#x1F4CD;</div><div><div class="ci-k">LOCATION</div><div class="ci-v">Near Canal Rest House, Gojra, PK</div></div></div>
+                    <div class="ci"><div class="ci-ic">&#x1F419;</div><div><div class="ci-k">GITHUB</div><div class="ci-v">github.com/asadqaisar</div></div></div>
+                    <div class="ci"><div class="ci-ic">&#x1F4BC;</div><div><div class="ci-k">LINKEDIN</div><div class="ci-v">linkedin.com/in/asadqaisar</div></div></div>
+                </div>
+            </div>
+            <div class="ct-r">
+                <form class="fm" onsubmit="event.preventDefault(); let b=this.querySelector('button'); b.innerText='TRANSMITTING...'; setTimeout(()=>{b.innerText='âœ“ MESSAGE SENT'; b.style.background='#00e5ff'; b.style.color='#050508';},1200);">
+                    <div class="f-in">
+                        <input type="text" placeholder="Name" required>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <textarea placeholder="Message" rows="5" required></textarea>
+                    <button type="submit" class="f-sub"><span class="fs-t">SEND MESSAGE</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="ticker">
+        <div class="tck-in">
+            <span class="tck-i">Open to Work âœ¦</span><span class="tck-i">Available for Freelance âœ¦</span><span class="tck-i">Faisalabad Â· PK âœ¦</span><span class="tck-i">asadqaisar17@gmail.com âœ¦</span><span class="tck-i">+92 309 988 8024 âœ¦</span><span class="tck-i">BS Software Engineering âœ¦</span><span class="tck-i">Logic Hive Homez âœ¦</span><span class="tck-i">22BC Dubai âœ¦</span><span class="tck-i">TUF EGS âœ¦</span><span class="tck-i">Head of Tech âœ¦</span>
+            <span class="tck-i">Open to Work âœ¦</span><span class="tck-i">Available for Freelance âœ¦</span><span class="tck-i">Faisalabad Â· PK âœ¦</span><span class="tck-i">asadqaisar17@gmail.com âœ¦</span><span class="tck-i">+92 309 988 8024 âœ¦</span><span class="tck-i">BS Software Engineering âœ¦</span><span class="tck-i">Logic Hive Homez âœ¦</span><span class="tck-i">22BC Dubai âœ¦</span><span class="tck-i">TUF EGS âœ¦</span><span class="tck-i">Head of Tech âœ¦</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="ft-brand">ASAD <span class="a">QAISAR</span></div>
+        <div class="ft-r">
+            <div class="ft-lks">
+                <a href="#">Email</a><a href="#">GitHub</a><a href="#">LinkedIn</a>
+            </div>
+            <div class="ft-cpy">&copy; 2025 Â· BUILT WITH LOGIC & EMPATHY</div>
+        </div>
+    </footer>
+    <script>
+        const isTouch=window.matchMedia('(pointer: coarse)').matches;
+const isMobile=window.innerWidth<=600;
+if(isTouch){
+  document.getElementById('cur').style.display='none';
+  document.getElementById('cur2').style.display='none';
+  document.body.style.setProperty('cursor','auto','important');
+}
+const PCOUNT=isMobile?60:130;
+const STAR_COUNT=isMobile?2:5;
+
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d', {alpha:false});
+let W,H;
+function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+window.addEventListener('resize',resize);
+resize();
+
+let mx=W/2, my=H/2, tgX=W/2, tgY=H/2;
+if(!isTouch){
+  window.addEventListener('mousemove',e=>{ tgX=e.clientX; tgY=e.clientY; });
+  let cur=document.getElementById('cur'), cur2=document.getElementById('cur2');
+  let cx=W/2, cy=H/2;
+  function updateCur(){
+    mx=tgX; my=tgY;
+    cx+=(mx-cx)*0.13; cy+=(my-cy)*0.13;
+    cur.style.transform=`translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+    cur2.style.transform=`translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+    requestAnimationFrame(updateCur);
+  }
+  updateCur();
+  document.addEventListener('mousedown',()=>document.body.classList.add('mdn'));
+  document.addEventListener('mouseup',()=>document.body.classList.remove('mdn'));
+}
+
+class P{
+  constructor(){ this.r(); this.x=Math.random()*W; this.y=Math.random()*H; }
+  r(){
+    this.x=Math.random()*W; this.y=Math.random()*H;
+    this.vx=(Math.random()-0.5)*0.5; this.vy=(Math.random()-0.5)*0.5;
+    this.rad=0.2+Math.random()*0.9;
+    this.ph=Math.random()*Math.PI*2;
+  }
+  t(){
+    if(!isTouch){
+      let dx=mx-this.x, dy=my-this.y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140 && d>0){
+        let f=(140-d)/140 * 0.02;
+        this.vx+=dx*f; this.vy+=dy*f;
+      }
+    }
+    this.vx*=0.98; this.vy*=0.98;
+    this.x+=this.vx+0.2; this.y+=this.vy-0.2;
+    if(this.x>W)this.x=0; if(this.x<0)this.x=W;
+    if(this.y>H)this.y=0; if(this.y<0)this.y=H;
+    this.ph+=0.02;
+  }
+  d(){
+    let o=0.4+Math.sin(this.ph)*0.4;
+    ctx.fillStyle=`rgba(200,255,0,${o})`;
+    ctx.beginPath(); ctx.arc(this.x,this.y,this.rad,0,Math.PI*2); ctx.fill();
+  }
+}
+
+class S{
+  constructor(){ this.r(); }
+  r(){
+    this.x=Math.random()*W; this.y=Math.random()*(H*0.4);
+    this.vx=-4-Math.random()*3; this.vy=4+Math.random()*3;
+    this.len=50+Math.random()*50;
+    this.life=0; this.maxLife=70+Math.random()*60;
+    this.del=Math.random()*200;
+  }
+  t(){
+    if(this.del>0){ this.del--; return; }
+    this.x+=this.vx; this.y+=this.vy;
+    this.life++;
+    if(this.life>=this.maxLife) this.r();
+  }
+  d(){
+    if(this.del>0)return;
+    let o = Math.sin((this.life/this.maxLife)*Math.PI);
+    let grad=ctx.createLinearGradient(this.x,this.y,this.x-this.vx*10,this.y-this.vy*10);
+    grad.addColorStop(0,`rgba(200,255,0,${o})`);
+    grad.addColorStop(1,'transparent');
+    ctx.strokeStyle=grad; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(this.x,this.y); ctx.lineTo(this.x-this.vx*10,this.y-this.vy*10); ctx.stroke();
+  }
+}
+
+let pts=[], sts=[];
+for(let i=0;i<PCOUNT;i++) pts.push(new P());
+for(let i=0;i<STAR_COUNT;i++) sts.push(new S());
+
+function dGrd(){
+  ctx.strokeStyle='rgba(200,255,0,0.08)'; ctx.lineWidth=1;
+  ctx.beginPath();
+  for(let x=0;x<W;x+=70){ ctx.moveTo(x,0); ctx.lineTo(x,H); }
+  for(let y=0;y<H;y+=70){ ctx.moveTo(0,y); ctx.lineTo(W,y); }
+  ctx.stroke();
+}
+
+function dCnn(){
+  ctx.lineWidth=0.5;
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      let dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){
+        ctx.strokeStyle=`rgba(200,255,0,${(1-d/110)*0.25})`;
+        ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke();
+      }
+    }
+  }
+}
+
+function frm(){
+  ctx.fillStyle='#050508'; ctx.fillRect(0,0,W,H);
+  dGrd();
+  if(!isMobile) dCnn();
+  pts.forEach(p=>{p.t();p.d();});
+  sts.forEach(s=>{s.t();s.d();});
+  
+  if(!isTouch){
+    let g=ctx.createRadialGradient(mx,my,0,mx,my,220);
+    g.addColorStop(0,'rgba(200,255,0,0.15)');
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  }
+  requestAnimationFrame(frm);
+}
+frm();
+
+let lperc=document.getElementById('lperc'), lfill=document.getElementById('lfill'), ldr=document.getElementById('loader');
+let prg=0;
+let lint=setInterval(()=>{
+  prg+=Math.random()*15;
+  if(prg>=100){ prg=100; clearInterval(lint); setTimeout(()=>ldr.classList.add('gone'),200); }
+  lperc.innerText=Math.floor(prg)+'%';
+  lfill.style.width=prg+'%';
+}, 100);
+
+let navL=document.querySelectorAll('.n-links a'), secs=document.querySelectorAll('section');
+window.addEventListener('scroll',()=>{
+  let y=window.scrollY+300;
+  secs.forEach(s=>{
+    if(y>=s.offsetTop && y<s.offsetTop+s.offsetHeight){
+      navL.forEach(a=>a.classList.remove('act'));
+      let a=document.querySelector(`.n-links a[href="#${s.id}"]`);
+      if(a) a.classList.add('act');
+    }
+  });
+});
+
+let obs=new IntersectionObserver(en=>{
+  en.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      let st=e.target.querySelectorAll('.st-n');
+      st.forEach(n=>{
+        if(!n.hasAttribute('dnd')){
+          n.setAttribute('dnd','1');
+          let t=+n.getAttribute('data-n'), c=0;
+          let inc=t/60;
+          function up(){ c+=inc; if(c>=t){n.innerText=t;}else{n.innerText=Math.floor(c);requestAnimationFrame(up);} }
+          up();
+        }
+      });
+      let sf=e.target.querySelectorAll('.sk-f');
+      sf.forEach(f=>{ if(f.getAttribute('data-w')) f.style.setProperty('--w',f.getAttribute('data-w')); });
+    }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal, .rl, .rr, section').forEach(e=>obs.observe(e));
+
+if(!isTouch){
+  document.querySelectorAll('.pj-c').forEach(c=>{
+    c.addEventListener('mousemove',e=>{
+      let r=c.getBoundingClientRect();
+      let x=(e.clientX-r.left)/r.width - 0.5;
+      let y=(e.clientY-r.top)/r.height - 0.5;
+      c.style.transform=`perspective(700px) rotateY(${x*7}deg) rotateX(${-y*5}deg) translateY(-5px)`;
+    });
+    c.addEventListener('mouseleave',()=>c.style.transform='');
+  });
+}
+
+window.st = function(i){
+  document.querySelectorAll('.cat-btn').forEach((b,j)=>b.classList.toggle('on',i===j));
+  document.querySelectorAll('.sk-pan').forEach((p,j)=>p.classList.toggle('on',i===j));
+  document.querySelectorAll('.sk-pan.on .sk-f').forEach(f=>f.style.setProperty('--w',f.getAttribute('data-w')));
+};
+window.xp = function(i){
+  document.querySelectorAll('.xp-ni').forEach((b,j)=>b.classList.toggle('on',i===j));
+  document.querySelectorAll('.xp-pan').forEach((p,j)=>p.classList.toggle('on',i===j));
+};
+
+    </script>
+</body>
+</html>
+
